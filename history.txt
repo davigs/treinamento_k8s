@@ -1,0 +1,524 @@
+1  curl -fsSL https://get.docker.com | sh
+    2  clear
+    3  history
+    4  clear
+    5  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+    6  nano /etc/apt/sources.list.d/kubernetes.list
+    7  apt-get update
+    8  apt-get install -y kubelet kubeadm kubectl
+    9  kubectl --help
+   10  clear
+   11  nano /etc/sysctl.d/k8s.conf
+   12  sysctl --system
+   13  cat /etc/issue
+   14  swapoff -a
+   15  clear
+   16  kubeadm init --pod-network-cidr 192.168.20.0/24
+   17  mkdir -p $HOME/.kube
+   18  cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   19  chown $(id -u):$(id -g) $HOME/.kube/config
+   20  kubectl get nodes
+   21  clear
+   22  kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+   23  kubectl get nodes
+   24  kubectl get nodes --all-namespaces
+   25  kubectl get pods --all-namespaces
+   26  kubectl describe node instance-1
+   27  clear
+   28  kubectl completion bash
+   29  source <(kubectl completion bash)
+   30  echo "source <(kubectl completion bash)" >> ~/.bashrc
+   31  clear
+   32  kubectl get namespaces
+   33  exit;
+   34  clear
+   35  kubectl get nodes,pods,namespaces
+   36  kubectl describe node instance-1 | grep -i taint
+   37  kubectl taint node --all node-role.kubernetes.io/master-
+   38  kubectl describe node instance-1 | grep -i taint
+   39  kubectl run nginx --image nginx --port 80
+   40  get pods
+   41  kubectl get pods
+   42  kubectl get deployment
+   43  kubectl scale deployment nginx --replicas=8
+   44  kubectl get pods
+   45  kubectl get pods -o
+   46  kubectl get pods -o name
+   47  kubectl get pods -o json
+   48  kubectl get pods -o
+   49  kubectl get pods -o wide
+   50  kubectl get service
+   51  kubectl expose deployment nginx
+   52  kubectl get service
+   53  curl 10.108.148.146
+   54  clear
+   55  kubectl get pods -o wide
+   56  kubectl exec nginx-7587c6fdb6-zcssm -- printenv | grep KUBERNETES
+   57  exit;
+   58  kubectl get pods -o wide
+   59  kubectl delete service nginx
+   60  kubectl expose deployment nginx --type=LoadBalancer
+   61  kubectl get service
+   62  kubectl run hog --image vish/stress
+   63  kubectl get deployment hog -o yaml > hog.yaml
+   64  nano hog.yaml 
+   65  clear
+   66  kubectl replace -f hog.yaml
+   67  kubectl get deployment hog -o | less
+   68  kubectl get deployment hog -o less
+   69  kubectl get deployment hog -o yaml
+   70  clear
+   71  nano hog.yaml 
+   72  clear
+   73  kubectl replace -f hog.yaml
+   74  kubectl replace -f hog.yaml --force
+   75  nano  baixo-custo.yaml
+   76  nano baixo-recurso.yaml
+   77  kubectl create -f baixo-recurso.yaml --namespace=baixo-recurso
+   78  nano baixo-recurso.yaml
+   79  clear
+   80  kubectl create -f baixo-recurso.yaml --namespace=baixo-recurso
+   81  nano baixo-recurso.yaml
+   82  kubectl create -f baixo-recurso.yaml --namespace=baixo-recurso
+   83  cat baixo-recurso.yaml 
+   84  nano baixo-recurso.yaml
+   85  kubectl create -f baixo-recurso.yaml --namespace=baixo-recurso
+   86  nano baixo-recurso.yaml
+   87  kubectl create -f baixo-recurso.yaml --namespace=baixo-recurso
+   88  clear
+   89  kubectl get namespace
+   90  kubectl create namespace baixo-recurso
+   91  kubectl create -f baixo-recurso.yaml --namespace=baixo-recurso
+   92  kubectl get LimitRange --all-namespace
+   93  kubectl get LimitRange --all-namespaces
+   94  clear
+   95  kubectl run testando-limite --image vish/stress -n baixo-recurso
+   96  kubectl get pod
+   97  kubectl get pod --all-namespaces
+   98  kubectl get pod -n baixo-recurso
+   99  kubectl delete deployment testando-limite -n baixo-custo
+  100  kubectl get deployment
+  101  kubectl delete deployment hog
+  102  kubectl delete deployment nginx
+  103  kubectl get deployment --all-namespaces
+  104  kubectl delete deployment testando-limite -n baixo-recurso
+  105  wget https://tinyurl.com/y8bn2awp -O complete-demo.yaml
+  106  ls
+  107  clear
+  108  kubectl create namespace sock-shop
+  109  kubectl applay -n sock-sho
+  110  kubectl applay -n sock-shop -f complete-demo.yaml
+  111  kubectl apply -n sock-shop -f complete-demo.yaml
+  112  echo "source <(kubectl completion bash)" >> ~/.bashrc
+  113  kubectl get pod -n sock-shop
+  114  clear
+  115  kubectl get svc -n sock-shop
+  116  kubectl get pod
+  117  kubectl get pods
+  118  kubectl get pods -n sock-shop
+  119  kubectl get pods -n sock-shop -o
+  120  kubectl get pods -n sock-shop -o widw
+  121  kubectl get pods -n sock-shop -o wide
+  122  clear
+  123  kubectl get deployment -n sock-shop
+  124  kubectl delete -f complete-demo.yaml
+  125  kubectl get deployment -n sock-shop
+  126  kubectl get pods
+  127  kubectl get pod
+  128  clear
+  129  kubectl edit deployment nginx
+  130  kubectl run nginx --image nginx
+  131  kubectl edit deployment nginx
+  132  kubectl get pods
+  133  kubectl rollout deployment nginx
+  134  kubectl rollout history deployment nginx
+  135  kubectl rollout history deployment nginx --revision 1
+  136  kubectl edit deployment nginx
+  137  kubectl rollout history deployment nginx
+  138  kubectl rollout history deployment nginx --revision 2
+  139  kubectl rollout undo deployment nginx --to-revision 1
+  140  kubectl rollout history deployment nginx
+  141  kubectl get pods
+  142  clear
+  143  kubectl get nodes
+  144  kubectl get deployment
+  145  kubectl delete deployment nginx
+  146  kubectl run nginx --image nginx --port 80
+  147  kubectl get replicaset
+  148  clear
+  149  kubectl get deployment nginx -o yaml > deploy_nginx.yaml
+  150  nano deploy_nginx.yaml 
+  151  kubectl label node instance-2 disk=ssd
+  152  kubectl label node instance-3 disk=hdd
+  153  nano deploy_nginx.yaml 
+  154  clear
+  155  kube
+  156  kubectl create -f deploy_nginx.yaml
+  157  nano deploy_nginx.yaml 
+  158  kubectl create -f deploy_nginx.yaml
+  159  nano deploy_nginx.yaml 
+  160  kubectl create -f deploy_nginx.yaml
+  161  kubectl get pods
+  162  kubectl get deploy
+  163  kubectl get rs
+  164  clear
+  165  kubectl get pods
+  166  kubectl get rs
+  167  kubectl get deploy
+  168  nano deploy_nginx.yaml 
+  169  kubectl create -f deploy_nginx.yaml
+  170  kubectl get pods
+  171  nano deploy_nginx.yaml 
+  172  kubectl create -f deploy_nginx.yaml
+  173  kubectl get pods
+  174  kubectl get pods -o wide
+  175  clear
+  176  kubectl get node -l disk=ssd
+  177  kubectl get node -l disk=hdd
+  178  kubectl get deployment
+  179  kubectl delete deployment nginx nginx2 nginx3 nginx4
+  180  clear
+  181  kubectl get service
+  182  apt-get install -y nfs-kernel-server
+  183  mkdir /opt/giropops
+  184  chmod 1777 /opt/giropops/
+  185  touch /opt/giropops/FUNCIONAA
+  186  ls /opt/giropops/
+  187  nano /etc/exports 
+  188  exportfs -ar
+  189  ifconfig
+  190  clear
+  191  ls
+  192  clear
+  193  nano pv.yaml
+  194  kubectl create -f pv.yaml
+  195  nano pvc.yaml
+  196  kubectl create -f pvc.yaml
+  197  kubectl get pvc
+  198  kubectl get nodes
+  199  kubectl get pod
+  200  kubectl get deployment
+  201  history
+  202  exit;
+  203  kubectl get nodes
+  204  kubectl get deploy
+  205  kubectl get pod
+  206  kubectl get rs
+  207  kubectl get pods --all-namespaces
+  208  ls
+  209  mkdir exercicio
+  210  cd exercicio/
+  211  ls
+  212  kubectl run nginx --image nginx
+  213  kubectl get deploy
+  214  kubectl get pods
+  215  kubectl get deployment nginx -o yaml > deployment.yaml
+  216  ls
+  217  nano deployment.yaml
+  218  clear
+  219  kubectl label node instance-1 dc=BR
+  220  kubectl label node instance-2 dc=USA
+  221  kubectl label node instance-3 dc=UK
+  222  cd exercicio/
+  223  ls
+  224  nano deployment.yaml 
+  225  kubectl get service
+  226  kubectl delete service nginx
+  227  kubectl get service
+  228  kubectl create service --type=NodePort --port=31212
+  229  kubectl create service --help
+  230  clear
+  231  kubectl create service --help
+  232  history
+  233  kubectl expose deployment nginx --type=NodePort --port=31212
+  234  kubectl get service
+  235  kubectl get pod
+  236  kubectl delete deployment nginx
+  237  kubectl create -f deployment.yaml
+  238  kubectl get pod
+  239  clear
+  240  kubectl describe deployment nginx
+  241  kubectl get pod -o wide
+  242  kubectl get service
+  243  kubectl get service nginx 
+  244  kubectl get service nginx -o yaml > service.yaml
+  245  ls -al
+  246  clear
+  247  history
+  248  kubectl get service
+  249  nano service.yaml 
+  250  curl 10.109.215.82
+  251  kubectl get deployment
+  252  kubectl delete service nginx
+  253  kubectl create -f service.yaml
+  254  kubectl delete service nginx
+  255  kubectl create -f service.yaml
+  256  kubectl get deployment
+  257  kubectl get service
+  258  curl 10.109.215.82
+  259  kubectl delete service nginx
+  260  nano service.yaml 
+  261  kubectl create -f service.yaml
+  262  clear
+  263  history
+  264  nano /etc/exports 
+  265  ls
+  266  cd exercicio/
+  267  ls
+  268  echo TESTE > index.html
+  269  ls -al
+  270  nano index.html 
+  271  cd ../
+  272  chmod 1777 exercicio/
+  273  cd exercicio/
+  274  ls
+  275  history
+  276  pwd
+  277  nano /etc/exports 
+  278  exportfs -ar
+  279  nano pv.yaml
+  280  cd ../
+  281  ls
+  282  nano pv.yaml 
+  283  cd exercicio/
+  284  nano pv.yaml
+  285  pwd
+  286  nano pv.yaml 
+  287  kubectl create -f pv.yaml
+  288  cd ../
+  289  nano pvc.yaml 
+  290  cd exercicio/
+  291  nano pvc.yaml
+  292  kubectl create -f pvc.yaml
+  293  clear
+  294  ls
+  295  cd exercicio/
+  296  ls
+  297  mkdir html 
+  298  mv index.html html/
+  299  ls
+  300  chmod 1777 html/
+  301  ls
+  302  nano /etc/exports 
+  303  exportfs -ar
+  304  nano pv.yaml 
+  305  nano pvc.yaml 
+  306  kubectl get pv
+  307  kubectl delete pv nginx-vol
+  308  kubectl get pvc
+  309  kubectl delete pvc nginx-pvc
+  310  kubectl create -f pv.yaml
+  311  kubectl create -f pvc.yaml
+  312  kubectl get pv,pvc
+  313  clear
+  314  ls
+  315  kubectl get deploy
+  316  kubectl get pod -o wide
+  317  nano pvc.yaml 
+  318  nano deployment.yaml 
+  319  clear
+  320  kubectl delete deployment nginx
+  321  kubectl create -f deployment.yaml
+  322  nano deployment.yaml 
+  323  kubectl create -f deployment.yaml
+  324  cd ../
+  325  cat pv.yaml 
+  326  cat pvc.yaml 
+  327  clear
+  328  kubectl create -f deployment.yaml
+  329  cd exercicio/
+  330  clear
+  331  nano deployment.yaml 
+  332  clear
+  333  kubectl create -f deployment.yaml
+  334  cd html/
+  335  ls
+  336  nano index.html 
+  337  clear
+  338  nano index.html 
+  339  clear
+  340  nano index.html 
+  341  cd ../
+  342  nano pv.yaml 
+  343  git init
+  344  git remote add origin https://github.com/davigs/DaviGomes_K8s.git
+  345  git add .
+  346  git status
+  347  git commit -m "Exercicio K8s" 
+  348  git config --global --edit
+  349  git commit -m "Exercicio K8s" 
+  350  git push -u origin master
+  351  git pull
+  352  git pull origin master
+  353  ls
+  354  nano README.md 
+  355  history
+  356  clear
+  357  nano README.md 
+  358  git add .
+  359  git commit -m "Edit README" 
+  360  git push -u origin master
+  361  clear
+  362  kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+  363  kubectl get service -n kube-system
+  364  kubectl edit service kubernetes-dashboard -n kube-system
+  365  kubectl get service -n kube-system
+  366  nano user.yaml
+  367  nano rbac.yaml
+  368  clear
+  369  kubectl create -f user.yaml
+  370  kubectl create -f rbac.yaml
+  371  kubectl get secret -n kube-system
+  372  kubectl  proxy --address= --port 443 --accept-hosts='.' --accept-paths='.' &
+  373  clear
+  374  kubectl get secret -n kube-system
+  375  kubectl describe secret admin-user-token-ppxvc -n kube-system
+  376  nano user.yaml 
+  377  nano rbac.yaml 
+  378  kill %1
+  379  kubectl  proxy --address= --port 8080 --accept-hosts='.' --accept-paths='.' &
+  380  clear
+  381  kubectl describe secret admin-user-token-ppxvc -n kube-system
+  382  clear
+  383  kubectl get service -n kube-system
+  384  kubectl describe secret admin-user-token-ppxvc -n kube-system
+  385  kubectl get serviceaccount -n kube-system
+  386  kubectl describe serviceaccount admin-user -n kube-system
+  387  ls user.yaml 
+  388  ls rbac.yaml 
+  389  clear
+  390  kubectl delete -f user.yaml -n kube-system
+  391  kubectl delete -f rbac.yaml -n kube-system
+  392  cat user.yaml 
+  393  cat rbac.yaml 
+  394  kubectl create -f rbac.yaml -n kube-system
+  395  kubectl create -f user.yaml -n kube-system
+  396  kubectl describe serviceaccount admin-user -n kube-system
+  397  kubectl describe secret admin-user-token-ppxvc -n kube-system
+  398  kubectl get secret
+  399  kubectl get secret -n kube-system
+  400  kubectl describe secret admin-user-token-tsn6b -n kube-system
+  401  jobs
+  402  kubectl  proxy --address= --port 8080 --accept-hosts='.' --accept-paths='.' &
+  403  ps -ef | ef
+  404  ps -ef | grep proxy
+  405  kill -9 8689
+  406  kubectl  proxy --address= --port 8080 --accept-hosts='.' --accept-paths='.' &
+  407  kubectl get service -n kube-system
+  408  kubectl get pod -n kube-system
+  409  kubectl get deploy -n kube-system
+  410  kubectl delete deploy kubernetes-dashboard -n kube-system
+  411  kubectl get pod -n kube-system
+  412  history
+  413  kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+  414  kubectl edit service kubernetes-dashboard -n kube-system
+  415  kubectl get service -n kube-system
+  416  kubectl describe serviceaccount admin-user -n kube-system
+  417  kubectl describe secret admin-user-token-tsn6b -n kube-system
+  418  kubectl get deploy
+  419  kubectl edit deploy nginx
+  420  kubectl get deploy
+  421  kubectl get deploy -n kube-system
+  422  kubectl edit deploy kubernetes-dashboard -n kube-system
+  423  kubectl delete deploy kubernetes-dashboard -n kube-system
+  424  kubectl get service -n kube-system
+  425  kubectl delete service kubernetes-dashboard -n kube-system
+  426  kubectl delete -f user.yaml
+  427  kubectl delete -f rbac.yaml
+  428  kubectl delete -f rbac.yaml -n kube-system
+  429  kubectl delete -f user.yaml -n kube-system
+  430  clear
+  431  kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+  432  kubectl create -f user.yaml -n kube-system
+  433  kubectl create -f rbac.yaml -n kube-system
+  434  jobs
+  435  kill %1
+  436  git clone https://github.com/badtuxx/ingress
+  437  kubectl proxy --address= --port 8080 --accept-hosts='.' --accept-paths='.' &
+  438  clear
+  439  kubectl get service -n kube-system
+  440  kubectl edit service kubernetes-dashboard -n kube-system
+  441  kubectl get service -n kube-system
+  442  kubectl describe serviceaccount admin-user -n kube-system
+  443  kubectl describe secret admin-user-token-qmmsr -n kube-system
+  444  ls
+  445  cd ingress/
+  446  ls
+  447  ls -al
+  448  kubectl create -f app-deployment.yaml -f app-service.yaml
+  449  kubectl create namespace ingress
+  450  kubectl create -f default-backend-deployment.yaml -f default-backend-service.yaml -n=ingress
+  451  kubectl create -f nginx-ingress-controller-config-map.yaml -n=ingress
+  452  kubectl create -f nginx-ingress-controller-roles.yaml -n=ingress
+  453  kubectl create -f nginx-ingress-controller-deployment.yaml -n=ingress
+  454  kubectl get pods
+  455  clear
+  456  kubectl get deploy -n ingress
+  457  nano nginx-ingress.yaml 
+  458  nano app-ingress.yaml 
+  459  kubectl create -f nginx-ingress.yaml -n ingress
+  460  nano /etc/hosts
+  461  clear
+  462  nano nginx-ingress.yaml 
+  463  nano app-ingress.yaml 
+  464  kubectl create -f nginx-ingress.yaml -n ingress
+  465  kubectl create -f app-ingress.yaml
+  466  kubectl create -f nginx-ingress-controller-service.yaml -n ingress
+  467  kubectl get service --all-namespaces
+  468  cd ../
+  469  wget goo.gl/nbEcHn
+  470  tar -zxf nbEcHn 
+  471  ls
+  472  cd linux-amd64/
+  473  ls
+  474  cp helm /usr/local/bin/
+  475  kubectl create serviceaccount --namespace kube-system tiller
+  476  clear
+  477  kubectl create clusterrolebinding tiller-cluster-role --clusterrole cluster-admin --serviceaccount kube-system:tiller
+  478  helm init
+  479  kubectl patch deployment tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}' -n kube-system
+  480  helm search dashboard
+  481  helm --debug install stable/kube-ops-view
+  482  jobs
+  483  helm search dashboard
+  484  helm --debug install stable/kubernetes-dashboard
+  485  export POD_NAME=$(kubectl get pods -n default -l "app=kubernetes-dashboard,release=virtuous-albatross" -o jsonpath="{.items[0].metadata.name}")
+  486  echo http://127.0.0.1:9090/
+  487  kubectl -n default port-forward $POD_NAME 9090:9090
+  488  echo http://127.0.0.1:9090
+  489  clear
+  490  echo http://k8s.heppi.me:9090
+  491  kubectl -n default port-forward $POD_NAME 9090:9090
+  492  jobs
+  493  kill %1
+  494  kubectl proxy --address= --port 9090 --accept-hosts='.' --accept-paths='.' &
+  495  clear
+  496  kubectl -n default port-forward $POD_NAME 9090:9090
+  497  kubectl get secret --all-namespace
+  498  kubectl get secret --all-namespaces
+  499  helm search database
+  500  heml --debug install stable/mariadb
+  501  helm --debug install stable/mariadb
+  502  helm list
+  503  kubectl get secret --namespace default riotous-panther-mariadb -o jsonpath="{.data.mariadb-root-password}" | base64 --decode
+  504  kubectl describe secret admin-user-token-qmmsr -n kube-system
+  505  kubectl describe secret tiller-token-gp8tg -n kube-system
+  506  MARIADB_ROOT_PASSWORD=$(kubectl get secret --namespace default riotous-panther-mariadb -o jsonpath="{.data.mariadb-root-password}" | base64 --decode)
+  507  kubectl run riotous-panther-mariadb-client --rm --tty -i --env MARIADB_ROOT_PASSWORD=$MARIADB_ROOT_PASSWORD --image bitnami/mariadb --command -- bash
+  508  clear
+  509  helm list
+  510  helm delete riotous-panther
+  511  helm --debug install stable/mariadb --set persistence.enabled=false
+  512  MARIADB_ROOT_PASSWORD=$(kubectl get secret --namespace default vociferous-wolverine-mariadb -o jsonpath="{.data.mariadb-root-password}" | base64 --decode)
+  513  kubectl run vociferous-wolverine-mariadb-client --rm --tty -i --env MARIADB_ROOT_PASSWORD=$MARIADB_ROOT_PASSWORD --image bitnami/mariadb --command -- bash
+  514  helm search nginx-ingress
+  515  helm install stable/nginx-ingress
+  516  helm list
+  517  helm inspect virtuous-albatross
+  518  helm search dashboard
+  519  helm inspect stable/kubernetes-dashboard
+  520  kubectl get secret --all-namespaces
+  521  kubectl describe secret kubernetes-dashboard-token-lpc6f -n kube-system
+  522  clear
+  523  exit;
+  524  history
