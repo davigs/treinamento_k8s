@@ -522,3 +522,103 @@
   522  clear
   523  exit;
   524  history
+525  ls
+  526  ls -al
+  527  exit;
+  528  ls
+  529  nano history.txt
+  530  clear
+  531  kubectl get deploy
+  532  ls
+  533  cd linux-amd64/
+  534  ls
+  535  cd ../
+  536  cd ingress/
+  537  ls
+  538  ls -al
+  539  rm -rf .git/
+  540  ls -al
+  541  cd ../
+  542  ls
+  543  ls -al
+  544  mkdir k8s
+  545  mv user.yaml k8s/
+  546  mv rbac.yaml k8s/
+  547  mv pv.yaml k8s/
+  548  mv pvc.yaml k8s/
+  549  mv hog.yaml k8s/
+  550  mv history.txt k8s/
+  551  mv deploy_nginx.yaml k8s/
+  552  mv complete-demo.yaml k8s/
+  553  mv baixo-recurso.yaml k8s/
+  554  ls -al
+  555  clear
+  556  kubectl describe node instance-3 | grep taint
+  557  kubectl describe node instance-3 | grep -i taint
+  558  kubectl get deploy
+  559  kubectl scale deployment nginx --replicas=5
+  560  kubectl get deploy
+  561  kubectl taint node instance-3 key1=value:NoSchedule
+  562  kubectl taint node instance-3 key1=value:NoExecute
+  563  kubectl drain instance-3
+  564  kubectl describe node instance-3 | grep -i taint
+  565  kubectl describe node instance-3
+  566  clear
+  567  kubectl uncordon instance-3
+  568  kubectl taint node instance-3 key1-
+  569  kubectl describe node instance-3 | grep -i taint
+  570  clear
+  571  ls
+  572  cd k8s/
+  573  ls
+  574  nano network_policy.yaml
+  575  kubectl run db --image=redis:4 --port 6379 --expose --labels app-bookstore,role-db
+  576  kubectl run db --image=redis:4 --port 6379 --expose --labels app=bookstore,role=db
+  577  ks
+  578  ls
+  579  mv network_policy.yaml redis-example.yaml
+  580  kubectl create -f redis-example.yaml
+  581  nano redis-example.yaml 
+  582  kubectl create -f redis-example.yaml
+  583  kubectl get deploy
+  584  kubectl get service
+  585  telnet 10.110.226.124 6379
+  586  kubectl run opa --labels app=inventory,role=web --rm -t -i --image=alpine -- sh
+  587  kubectl get pods
+  588  nano tudo-deny.yaml
+  589  clear
+  590  nano api-allow.yaml
+  591  kubectl create -f api-allow.yaml
+  592  kubectl run strigus --labels app=bookstore,role=api --rm -t -i --image=alpine -- sh
+  593  kubectl run apiserver --image=nginx --port 80 --expose --labels app=bookstore,role=api
+  594  kubectl run strigus --labels app=bookstore,role=api --rm -t -i --image=alpine -- sh
+  595  kubectl run --rm -i -t --image=alpine strigu --labels app=bookstore,role=frontend  -- sh
+  596  kubectl get deploy
+  597  clear
+  598  ls
+  599  ls -al
+  600  git init 
+  601  git remote add origin https://github.com/davigs/treinamento_k8s.git
+  602  git status
+  603  git add .
+  604  git commit -m "Finish"
+  605  git push -u origin master
+  606  ls
+  607  cd ../
+  608  ls
+  609  ls -al
+  610  mv ingress/* k8s/
+  611  ls
+  612  cd k8s/
+  613  ls
+  614  git add .
+  615  git commit -m "ingress"
+  616  git push -u origin master
+  617  exit;
+  618  ls
+  619  cd k8s/
+  620  history
+  621  ls
+  622  cat history.txt 
+  623  clear
+  624  history
